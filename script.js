@@ -1,6 +1,7 @@
 let gameOver = false;
 let currentPlayer = "X";
 let header = document.getElementsByTagName("h1")[0];
+let leftAlign = 45;
 
 var cols = Array.from(document.getElementsByClassName("col"));
 var rows = Array.from(document.getElementsByClassName("row"));
@@ -8,13 +9,32 @@ var rows = Array.from(document.getElementsByClassName("row"));
 
 for (let col of cols) {
     col.addEventListener("click", e => {
-        if (!gameOver) {
-            col.innerHTML = "<div style='position: absolute; top: 50%; left: 50%;'>" + currentPlayer + "</div>";
+        if (!gameOver && e.target.innerHTML === "") {
+            placeSymbol(col)
             if (checkIfGameOver(e)) return;
-            currentPlayer = currentPlayer === "X" ? "O" : "X";
-            header.innerHTML = "Player " + currentPlayer + " turn";
+            nextPlayerTurn();
+            
+            if (isLeftColNeeded(col))
+            var rows = Array.from(document.getElementsByClassName("row"));
+            leftAlign -= 3.5;
+
+            for (let row of rows) {
+                var div = document.createElement("div");
+                div.classList = "col";
+                row.insertBefore(div, row.firstChild);
+                document.getElementById("board").style = "left: " + leftAlign + "%;";
+            }
         }
     })
+}
+
+const isLeftColNeeded = (col) => {
+    const currentIndex = cols.findIndex(x => x === col);
+    return currentIndex % rows.length === 0;
+};
+
+const placeSymbol = (col) => {
+    col.innerHTML = "<div>" + currentPlayer + "</div>";
 }
 
 const checkIfGameOver = (e) => {
@@ -24,6 +44,11 @@ const checkIfGameOver = (e) => {
         return true;
     }
 };
+
+const nextPlayerTurn = () => {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    header.innerHTML = "Player " + currentPlayer + " turn";
+}
 
 const playerWon = (e) => {
     const rowsAmount = rows.length;
