@@ -20,4 +20,4 @@ This project is purely for showing my skills with Javascript, CSS and HTML. You 
 After cloning the code, you can just open the html file in a modern browser and enjoy playing the game.
 
 ## Status
-This project is currently in progress. The base game is already finished. The procedural generation will be done in the near future.
+This project is finished. Only 1 bug needs to be fixed regarding the margin of newly generated rows and columns.
